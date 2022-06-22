@@ -22,18 +22,22 @@ use App\Http\Controllers\PlayerController;
 //});
 Route::redirect('/', 'country');
 Route::resource('country', CountryController::class);
+Route::get('country/{id}/update', [CountryController::class, 'update']);
 
 Route::resource('league', LeagueController::class, ['except' => ['index',
 'create']]);
 Route::get('league/country/{id}', [LeagueController::class, 'index']);
+Route::get('league/country/{id}/update', [LeagueController::class, 'update']);
 Route::get('league/country/{id}/create', [LeagueController::class, 'create']);
 
 Route::resource('team', TeamController::class, ['except' => ['index',
 'create']]);
 Route::get('league/country/team/{id}/', [TeamController::class, 'index']);
+Route::get('league/country/team/{id}/update', [TeamController::class, 'update']);
 Route::get('league/country/team/{id}/create', [TeamController::class, 'create']);
 
 Route::resource('player', PlayerController::class, ['except' => ['index',
 'create']]);
 Route::get('league/country/team/players/{id}/', [PlayerController::class, 'index']);
+Route::get('league/country/team/players/{id}/update', [PlayerController::class, 'update']);
 Route::get('league/country/team/players/{id}/create', [PlayerController::class, 'create']);
