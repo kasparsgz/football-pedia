@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Country;
 use App\Models\League;
 use App\Models\Team;
-use App\Models\PLayer;
+use App\Models\Player;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 class PlayerController extends Controller
 {
     /**
@@ -29,6 +29,7 @@ class PlayerController extends Controller
      */
     public function create($id)
     {
+        if(!Auth::check()) return "Not allowed! Go home!";
     $team = Team::findOrFail($id);
     return view('player_new', compact('team'));
     }
@@ -41,6 +42,14 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Auth::check()) return "Not allowed! Go home!";
+        $rules = array(
+            'first_name' => 'required|min:2|max:191',
+            'last_name' => 'required|min:2|max:191',
+            'country' => 'min:2|max:191',
+            );
+            $this->validate($request, $rules);
+
     $player = new Player();
     $player->team_id = $request->team_id;
     $player->first_name = $request->first_name;
@@ -70,7 +79,12 @@ class PlayerController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Auth::check()){
+        $players = Player::find($id);
+        return view('player_update', compact('players'));}
+        else{
+            return "Not allowed here!";
+        }
     }
 
     /**
@@ -82,7 +96,22 @@ class PlayerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(!Auth::check()) return "Not allowed! Go home!";
+        $rules = array(
+            'first_name' => 'required|min:2|max:191',
+            'last_name' => 'required|min:2|max:191',
+            'country' => 'min:2|max:191',
+            );
+            $this->validate($request, $rules);
+
+
+        $player = Team::find($id);
+        $player->first_name=$request->get('first_name');
+        $player->last_name=$request->get('last_name');
+        $player->country=$request->get('country');
+        $player->about=$request->get('about');
+        $player->save();
+        return redirect('league/country/team/player/'.$player->team_id);
     }
 
     /**

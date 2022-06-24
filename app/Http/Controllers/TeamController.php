@@ -8,6 +8,7 @@ use App\Models\Player;
 use App\Models\League;
 use App\Models\Team;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -29,6 +30,7 @@ class TeamController extends Controller
      */
     public function create($id)
     {
+        if(!Auth::check()) return  "Not allowed! Go home!";
      $league = League::findOrFail($id);
      return view('team_new', compact('league'));
  }
@@ -41,6 +43,12 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Auth::check()) return "Not allowed! Go home!";
+        $rules = array(
+            'nosaukums' => 'required|min:2|max:191',
+            );
+            $this->validate($request, $rules);
+
         $team = new Team();
         $team->league_id = $request->league_id;
         $team->nosaukums = $request->nosaukums;
@@ -68,7 +76,12 @@ class TeamController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Auth::check()){
+        $teams = Team::find($id);
+        return view('teams_update', compact('teams'));}
+        else{
+            return "Not allowed here!";
+        }
     }
 
     /**
@@ -80,7 +93,18 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(!Auth::check()) return "Not allowed! Go home!";
+        $rules = array(
+            'nosaukums' => 'required|min:2|max:191',
+            );
+            $this->validate($request, $rules);
+
+
+        $team = Team::find($id);
+        $team->nosaukums=$request->get('nosaukums');
+        $team->about=$request->get('about');
+        $team->save();
+        return redirect('league/country/team/'.$team->league_id);
     }
 
     /**

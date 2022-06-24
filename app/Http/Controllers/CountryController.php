@@ -8,10 +8,14 @@ use App\Models\League;
 use App\Models\Player;
 use App\Models\Team;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 
 class CountryController extends Controller
 {
+
+    //public function __construct(){
+    ///        $this->middleware('auth');
+    //}
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +34,8 @@ class CountryController extends Controller
      */
     public function create()
     {
+        if(!Auth::check()) return "Not allowed! Go home!";
+
         $Countries = Country::all();
         return view('country_new');
 
@@ -43,19 +49,20 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Auth::check()) return "Not allowed! Go home!";
+
         $rules = array(
             'name' => 'required|min:2|max:100',
             'code' => 'required|min:1|max:3',
             );
             $this->validate($request, $rules);
-
         $country = new Country();
         $country->id=$request->id;
         $country->name=$request->name;
         $country->code=$request->code;
         $country->about=$request->about;
         $country->save();
-       return redirect('country');
+       return redirect('/country');
     }
 
     /**
@@ -77,7 +84,12 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Auth::check()){
+        $countries = Country::find($id);
+        return view('countries_update', compact('countries'));}
+        else{
+            return "Not allowed here!";
+        }
     }
 
     /**
@@ -89,7 +101,20 @@ class CountryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(!Auth::check()) return "Not allowed! Go home!";
+        $rules = array(
+            'name' => 'required|min:2|max:100',
+            'code' => 'required|min:1|max:3',
+            );
+            $this->validate($request, $rules);
+
+
+        $country = Country::find($id);
+        $country->name=$request->get('name');
+        $country->code=$request->get('code');
+        $country->about=$request->get('about');
+        $country->save();
+        return redirect('country/'.$country->country_id);
     }
 
     /**
