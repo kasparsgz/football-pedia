@@ -17,11 +17,18 @@ use App\Http\Controllers\PlayerController;
 |
 */
 
-//Route::get('/', function () {
- //   return view('welcome');
-//});
-Route::redirect('/', 'country');
-Route::resource('country', CountryController::class);
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+Route::redirect('/', 'login');
+Route::resource('country', CountryController::class);//->middleware('auth')
 Route::get('country/{id}/update', [CountryController::class, 'update']);
 
 Route::resource('league', LeagueController::class, ['except' => ['index',
