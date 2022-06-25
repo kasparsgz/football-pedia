@@ -34,8 +34,9 @@ class CountryController extends Controller
      */
     public function create()
     {
-        if(!Auth::check()) return "Not allowed! Go home!";
-
+        //if(!Auth::check()) return "Not allowed! Go home!";
+       // $this->authorize("create", Country::class);
+        //return view("artist_add");
         $Countries = Country::all();
         return view('country_new');
 
@@ -84,6 +85,7 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize("edit", Country::class);
         if(Auth::check()){
         $countries = Country::find($id);
         return view('countries_update', compact('countries'));}
@@ -102,6 +104,7 @@ class CountryController extends Controller
     public function update(Request $request, $id)
     {
         if(!Auth::check()) return "Not allowed! Go home!";
+        $this->authorize("update", Country::class);
         $rules = array(
             'name' => 'required|min:2|max:100',
             'code' => 'required|min:1|max:3',
@@ -124,7 +127,8 @@ class CountryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {//šis vel jāaktivizē
+    {
+    $this->authorize("delete", Country::class);
     League::where('country_id',$id)->delete();
     Country::findOrFail($id)->delete();
     return redirect('country/'); }

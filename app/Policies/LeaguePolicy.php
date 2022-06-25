@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Country;
+use App\Models\League;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CountryPolicy
+class LeaguePolicy
 {
     use HandlesAuthorization;
 
@@ -26,10 +26,10 @@ class CountryPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Country  $country
+     * @param  \App\Models\League  $league
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Country $country)
+    public function view(User $user, League $league)
     {
         //
     }
@@ -53,7 +53,7 @@ class CountryPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Country  $country
+     * @param  \App\Models\League  $league
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user)
@@ -68,7 +68,7 @@ class CountryPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Country  $country
+     * @param  \App\Models\League  $league
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(User $user)
@@ -82,10 +82,10 @@ class CountryPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Country  $country
+     * @param  \App\Models\League  $league
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Country $country )
+    public function restore(User $user, League $league )
     {
         //
     }
@@ -94,10 +94,10 @@ class CountryPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Country  $country
+     * @param  \App\Models\League  $league
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Country $country)
+    public function forceDelete(User $user, League $league)
     {
         //
     }
@@ -105,7 +105,7 @@ class CountryPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Country  $country
+     * @param  \App\Models\League  $league
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function edit(User $user)

@@ -76,7 +76,9 @@ class LeagueController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize("edit", League::class);
         if(Auth::check()){
+
         $leagues = League::find($id);
         return view('leagues_update', compact('leagues'));}
         else{
@@ -94,6 +96,7 @@ class LeagueController extends Controller
     public function update(Request $request, $id)
     {
         if(!Auth::check()) return "Not allowed! Go home!";
+        $this->authorize("update", League::class);
         $rules = array(
             'nosaukums' => 'required|min:2|max:191',
             );
@@ -115,6 +118,7 @@ class LeagueController extends Controller
      */
     public function destroy($id)
     {
+    $this->authorize("delete", League::class);
     $country_id = League::findOrFail($id)->country_id;
     League::findOrFail($id)->delete();
     return redirect('league/country/' . $country_id);

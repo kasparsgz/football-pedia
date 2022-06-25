@@ -76,6 +76,7 @@ class TeamController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize("edit", Team::class);
         if(Auth::check()){
         $teams = Team::find($id);
         return view('teams_update', compact('teams'));}
@@ -94,6 +95,7 @@ class TeamController extends Controller
     public function update(Request $request, $id)
     {
         if(!Auth::check()) return "Not allowed! Go home!";
+        $this->authorize("update", Team::class);
         $rules = array(
             'nosaukums' => 'required|min:2|max:191',
             );
@@ -115,6 +117,7 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize("delete", Team::class);
         $league_id = Team::findOrFail($id)->league_id;
         Team::findOrFail($id)->delete();
         return redirect('league/country/team/' . $league_id);

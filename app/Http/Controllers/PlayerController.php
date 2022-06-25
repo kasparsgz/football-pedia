@@ -79,6 +79,7 @@ class PlayerController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize("edit", Player::class);
         if(Auth::check()){
         $players = Player::find($id);
         return view('player_update', compact('players'));}
@@ -97,6 +98,7 @@ class PlayerController extends Controller
     public function update(Request $request, $id)
     {
         if(!Auth::check()) return "Not allowed! Go home!";
+        $this->authorize("update", Player::class);
         $rules = array(
             'first_name' => 'required|min:2|max:191',
             'last_name' => 'required|min:2|max:191',
@@ -122,6 +124,7 @@ class PlayerController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize("delete", Player::class);
         $team_id = Player::findOrFail($id)->team_id;
         Player::findOrFail($id)->delete();
         return redirect('league/country/team/players/' . $team_id);
