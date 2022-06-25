@@ -35,16 +35,18 @@
     @php
     use App\Http\Controllers\TeamController;
     @endphp
-    Update information for league <b>{{ $teams->nosaukums }}</b>:
-    With previous information <b>{{ $teams->nosaukums }}</b> , <b>{{ $teams->about }}</b>
+
+        {{ __('Atjaunosim informāciju par komandu -') }} <b>{{ $teams->nosaukums }}</b>:
+        {{ __('Ar iepriekšējo informāciju -') }}  <b>{{ $teams->nosaukums }}</b> , <b>{{ $teams->about }}</b>
     <form method="POST" action="{{action([App\Http\Controllers\TeamController::class, 'update'], $teams->id) }}" method="post">
     @csrf
     @method('GET')
-     <label for="nosaukums">Updated team nosaukums: </label>
+
+     <label for="nosaukums">{{ __('Jaunais komandas nosaukums:') }}</label>
      <input type="text" name="nosaukums" id="nosaukums" value="{{ $teams->nosaukums }}">
-     <label for="about">Updated About: </label>
+     <label for="about">{{ __('Jaunais apraksts:') }} </label>
      <input type="text" name="about" id="about" value="{{ $teams->about }}">
-     <input type="submit" class="button"value="Update">
+     <input type="submit" class="button"value="{{ __('Update') }}">
     </form>
      @if (count($errors) > 0)
      <div>

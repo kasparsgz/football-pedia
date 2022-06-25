@@ -33,19 +33,21 @@
             border: 3px solid #86af49;}
             .button:hover {background-color: #86af49}
             </style>
+
     @php
     use App\Http\Controllers\LeagueController;
     @endphp
-    Update information for league <b>{{ $leagues->nosaukums }}</b>:
-    With previous information <b>{{ $leagues->nosaukums }}</b> , <b>{{ $leagues->about }}</b>
+
+     {{ __('Atjaunosim informāciju par līgu -') }}<b>{{ $leagues->nosaukums }}</b>:
+     {{ __('Ar iepriekšējo informāciju') }} <b>{{ $leagues->nosaukums }}</b> , <b>{{ $leagues->about }}</b>
     <form method="POST" action="{{action([App\Http\Controllers\LeagueController::class, 'update'], $leagues->id) }}" method="post">
     @csrf
     @method('GET')
-     <label for="nosaukums">Updated līgas nosaukums: </label>
+     <label for="nosaukums">     {{ __('Jaunais līgas nosaukums:') }} </label>
      <input type="text" name="nosaukums" id="nosaukums" value="{{ $leagues->nosaukums }}">
-     <label for="about">Updated About: </label>
+     <label for="about">     {{ __('Jaunais apraksts:') }} </label>
      <input type="text" name="about" id="about" value="{{ $leagues->about }}">
-     <input type="submit" value="update">
+     <input type="submit" class = "button"value="{{ __('Update') }}">
     </form>
      @if (count($errors) > 0)
      <div>

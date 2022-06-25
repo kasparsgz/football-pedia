@@ -33,23 +33,24 @@
             border: 3px solid #86af49;}
             .button:hover {background-color: #86af49}
             </style>
-Input the information about the <b>new country:</b>
+
+                {{ __('Ievadiet informāciju par') }} <b> {{ __('jauno valsti:') }}</b>
 <form method="POST" action="{{
 action([App\Http\Controllers\CountryController::class, 'store']) }}">
 @csrf
-<label for="name">Country Name: </label>
+<label for="name">{{ __('Valsts nosaukums:') }} </label>
 <input type="string" name="name" id="name">
 <br>
 <br>
-<label for="code">Country Code: </label>
+<label for="code">    {{ __('Valsts kods:') }} </label>
 <input type="string" name="code" id="code">
 <br>
 <br>
-<label for="about">About: </label>
+<label for="about"> {{ __('Apraksts:') }} </label>
 <input type="text" name="about" id="about">
 <br>
 <br>
-<input type="submit" class="button" value="Add">
+<input type="submit" class="button" value="{{ __('Add') }}">
 
 </form>
 </body>

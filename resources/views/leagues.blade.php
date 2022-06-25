@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <h1 class = "header">Information about leagues that have been added </h1>
+        <h1 class = "header">  {{ __('Informācija par pievienotajām līgām') }}</h1>
     </head>
 <body>
     <style>
@@ -35,46 +35,46 @@
 </style>
 
  @if (count($leagues) == 0)
- <p color='red'> There is no league in the database!</p>
+ <p color='red'>  {{ __('Datubāzē nav ierakstu!') }}</p>
  @else
  <table border="1" class="center">
  <tr>
 
- <td> League Name </td>
- <td> League About </td>
- <td> Show Teams </td>
+ <td>    {{ __('Līgas nosaukums') }} </td>
+ <td> {{ __('Līgas apraksts') }} </td>
+ <td> {{ __('Parādīt komandas') }} </td>
  @auth
- <td> Delete League</td>
- <td> Update League</td>@endauth
+ <td> {{ __('Izdzēst līgu') }}</td>
+ <td> {{ __('Mainīt informāciju') }} </td>@endauth
  </tr>
  @foreach ($leagues as $league)
  <tr>
 
  <td> {{ $league->nosaukums }} </td>
  <td> {{ $league->about }} </td>
- <td> <input type="button" value="show"class="button"
+ <td> <input type="button" value="{{ __('Show') }}"class="button"
     onclick="showTeams({{ $league->id }})"> </td>
     @auth
  <td><form method="POST"
     action="{{action([App\Http\Controllers\LeagueController::class, 'destroy'],
     $league->id) }}">
      @csrf @method('DELETE')<input type="submit"class="button"
-    value="delete"></form> </td>
+    value="{{ __('Delete') }}"></form> </td>
  </td>
  <td> <form method="POST" action="{{
     action([App\Http\Controllers\LeagueController::class, 'edit'], $league->id)
-    }}">@csrf @method('GET')<input type="submit"class="button" value="Update"></form> </td>
+    }}">@csrf @method('GET')<input type="submit"class="button" value="{{ __('Update') }}"></form> </td>
     </td>@endauth
  @endforeach
  </table>
  @endif
  @auth
- <p> <input type="button" value="New League"class="button" onclick="newLeague( {{ $country_id
+ <p> <input type="button" value="{{ __('New league') }}"class="button" onclick="newLeague( {{ $country_id
 }}
 )"> </p>@endauth
 
 
-<input type="button" value="Back"class="button"
+<input type="button" value="{{ __('Back') }}"class="button"
     onclick="Back()">
 <script>
     function showTeams(leagueID) {

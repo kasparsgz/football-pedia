@@ -32,30 +32,32 @@
         border: 3px solid #86af49;}
         .button:hover {background-color: #86af49}
         </style>
- We will add a player for <b>{{ $team->nosaukums }}</b>:
+
+        {{ __('Pievienosim jaunu spēlētāju komandai -') }} <b>{{ $team->nosaukums }}</b>:
  <br>
  <br>
  <form method="POST"
 action="{{action([App\Http\Controllers\PlayerController::class, 'store']) }}">
  @csrf
+
  <input type="hidden" name="team_id" value="{{ $team->id }}">
- <label for="first_name">Vārds: </label>
+ <label for="first_name">{{ __('Vārds:') }} </label>
  <input type="string" name="first_name" id="first_name">
  <br>
  <br>
- <label for="last_name">Uzvārds: </label>
+ <label for="last_name">{{ __('Uzvārds:') }} </label>
  <input type="string" name="last_name" id="last_name">
  <br>
  <br>
- <label for="country">Nacionalitāte: </label>
+ <label for="country">{{ __('Nacionalitāte:') }} </label>
  <input type="string" name="country" id="country">
  <br>
  <br>
- <label for="about">About: </label>
+ <label for="about">{{ __('Apraksts:') }} </label>
  <input type="string" name="about" id="about">
  <br>
  <br>
- <input type="submit" class ="button" value="Add">
+ <input type="submit" class ="button" value="{{ __('Add') }}">
  </form>
 </body>
 </html>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
     <head>
-        <h1 class = "header">Information about players that have been added</h1>
+        <h1 class = "header">{{ __('Informācija par pievienotajiem spēlētājiem') }} </h1>
     </head>
 <body>
     <style>
@@ -34,18 +35,19 @@
     .button:hover {background-color: #86af49}
 </style>
  @if (count($players) == 0)
- <p color='red'> There is player in the database!</p>
+
+ <p color='red'> {{ __('Datubāzē nav ierakstu!') }}</p>
  @else
  <table border="1" class="center">
  <tr>
 
- <td> Vārds </td>
- <td> Uzvārds </td>
- <td> Nacionalitāte </td>
- <td> About </td>
+ <td>  {{ __('Vārds') }} </td>
+ <td> {{ __('Uzvārds') }} </td>
+ <td> {{ __('Nacionalitāte') }} </td>
+ <td> {{ __('Apraksts') }} </td>
  @auth
- <td> Delete Player</td>
- <td> Update Player</td>
+ <td> {{ __('Izdzēst spēlētāju') }}</td>
+ <td> {{ __('Izmainīt informāciju') }}</td>
  @endauth
  </tr>
  @foreach ($players as $player)
@@ -59,18 +61,18 @@
     action="{{action([App\Http\Controllers\PlayerController::class, 'destroy'],
     $player->id) }}">
      @csrf @method('DELETE')<input type="submit" class="button"
-    value="delete"></form> </td>
+    value="{{ __('Delete') }}"></form> </td>
     <td> <form method="POST" action="{{
         action([App\Http\Controllers\PlayerController::class, 'edit'], $player->id)
-        }}">@csrf @method('GET')<input type="submit"class="button" value="Update"></form> </td>
+        }}">@csrf @method('GET')<input type="submit"class="button" value="{{ __('Update') }}"></form> </td>
         </td>
  </td>@endauth
  @endforeach
  </table>
- <input type="button" value="Back to start"class="button"
+ <input type="button" value="{{ __('Back to start') }}"class="button"
  onclick="Back()">
  @endif @auth
- <p> <input type="button" class="button"value="New Player" onclick="newPlayer( {{ $team_id
+ <p> <input type="button" class="button"value="{{ __('New player') }}" onclick="newPlayer( {{ $team_id
  }}
  )"> </p> @endauth
 

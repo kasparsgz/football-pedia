@@ -37,21 +37,21 @@
     use App\Http\Controllers\PlayerController;
     ?>
 
-    Update information for player <b><?php echo e($players->first_name); ?></b> , <b><?php echo e($players->last_name); ?></b>:
+ <?php echo e(__('Atjaunosim informāciju par spēlētāju -')); ?>  <b><?php echo e($players->first_name); ?></b> , <b><?php echo e($players->last_name); ?></b>:
     <br>
-    With previous information <b><?php echo e($players->country); ?></b> , <b><?php echo e($players->about); ?></b>
+    <?php echo e(__('Ar iepriekšējo informāciju')); ?> <b><?php echo e($players->country); ?></b> , <b><?php echo e($players->about); ?></b>
     <form method="POST" action="<?php echo e(action([App\Http\Controllers\PlayerController::class, 'update'], $players->id)); ?>" method="post">
     <?php echo csrf_field(); ?>
     <?php echo method_field('GET'); ?>
-     <label for="first_name">Updated vārds: </label>
+     <label for="first_name"> <?php echo e(__('Jaunais vārds:')); ?> </label>
      <input type="text" name="first_name" id="first_name" value='<?php echo e($players->first_name); ?>'>
-     <label for="last_name">Updated uzvārds: </label>
+     <label for="last_name"><?php echo e(__('Jaunais uzvārds:')); ?> </label>
      <input type="text" name="last_name" id="last_name" value="<?php echo e($players->last_name); ?>">
-     <label for="country">Updated nacionalitāte: </label>
+     <label for="country"><?php echo e(__('Jaunā nacionalitāte:')); ?> </label>
      <input type="text" name="country" id="country" value="<?php echo e($players->country); ?>">
-     <label for="about">Updated about: </label>
+     <label for="about"><?php echo e(__('Jaunais apraksts:')); ?> </label>
      <input type="text" name="about" id="about" value="<?php echo e($players->about); ?>">
-     <input type="submit" class="button"value="Update">
+     <input type="submit" class="button"value="<?php echo e(__('Update')); ?>">
     </form>
      <?php if(count($errors) > 0): ?>
      <div>

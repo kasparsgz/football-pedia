@@ -36,18 +36,23 @@
     <?php
     use App\Http\Controllers\CountryController;
     ?>
-    Update information for country <b><?php echo e($countries->name); ?></b>:
-    With previous information <b><?php echo e($countries->name); ?></b> , <b><?php echo e($countries->code); ?></b> , <b><?php echo e($countries->about); ?></b>
+    <?php echo e(__('Atjaunosim informāciju par valsti -')); ?>
+
+     <b><?php echo e($countries->name); ?></b>:
+     <?php echo e(__('Ar iepriekšējo informāciju')); ?>
+
+     <b><?php echo e($countries->name); ?></b> , <b><?php echo e($countries->code); ?></b> , <b><?php echo e($countries->about); ?></b>
     <form method="POST" action="<?php echo e(action([App\Http\Controllers\CountryController::class, 'update'], $countries->id)); ?>" method="post">
     <?php echo csrf_field(); ?>
     <?php echo method_field('GET'); ?>
-     <label for="name">Updated country Name: </label>
+
+     <label for="name"><?php echo e(__('Jaunais valsts nosaukums:')); ?> </label>
      <input type="text" name="name" id="name" value="<?php echo e($countries->name); ?>">
-     <label for="code">Updated country code: </label>
+     <label for="code"><?php echo e(__('Jaunais valsts kods:')); ?> </label>
      <input type="text" name="code" id="code" value="<?php echo e($countries->code); ?>">
-     <label for="about">Updated About: </label>
+     <label for="about"><?php echo e(__('Jaunais apraksts:')); ?> </label>
      <input type="text" name="about" id="about" value="<?php echo e($countries->about); ?>">
-     <input type="submit" class="button"value="Update">
+     <input type="submit" class="button"value="<?php echo e(__('Update')); ?>">
     </form>
      <?php if(count($errors) > 0): ?>
      <div>

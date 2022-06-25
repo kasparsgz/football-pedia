@@ -36,18 +36,21 @@
     @php
     use App\Http\Controllers\CountryController;
     @endphp
-    Update information for country <b>{{ $countries->name }}</b>:
-    With previous information <b>{{ $countries->name }}</b> , <b>{{ $countries->code }}</b> , <b>{{ $countries->about }}</b>
+    {{ __('Atjaunosim informāciju par valsti -') }}
+     <b>{{ $countries->name }}</b>:
+     {{ __('Ar iepriekšējo informāciju') }}
+     <b>{{ $countries->name }}</b> , <b>{{ $countries->code }}</b> , <b>{{ $countries->about }}</b>
     <form method="POST" action="{{action([App\Http\Controllers\CountryController::class, 'update'], $countries->id) }}" method="post">
     @csrf
     @method('GET')
-     <label for="name">Updated country Name: </label>
+
+     <label for="name">{{ __('Jaunais valsts nosaukums:') }} </label>
      <input type="text" name="name" id="name" value="{{ $countries->name }}">
-     <label for="code">Updated country code: </label>
+     <label for="code">{{ __('Jaunais valsts kods:') }} </label>
      <input type="text" name="code" id="code" value="{{ $countries->code }}">
-     <label for="about">Updated About: </label>
+     <label for="about">{{ __('Jaunais apraksts:') }} </label>
      <input type="text" name="about" id="about" value="{{ $countries->about }}">
-     <input type="submit" class="button"value="Update">
+     <input type="submit" class="button"value="{{ __('Update') }}">
     </form>
      @if (count($errors) > 0)
      <div>

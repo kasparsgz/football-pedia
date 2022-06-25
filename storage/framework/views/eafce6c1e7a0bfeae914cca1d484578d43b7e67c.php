@@ -33,21 +33,22 @@
             border: 3px solid #86af49;}
             .button:hover {background-color: #86af49}
             </style>
- We will add a new league for <b><?php echo e($country->name); ?></b>:
+
+            <?php echo e(__('Pievienosim jaunu līgu valstī -')); ?> <b><?php echo e($country->name); ?></b>:
  <form method="POST"
 action="<?php echo e(action([App\Http\Controllers\LeagueController::class, 'store'])); ?>">
  <?php echo csrf_field(); ?>
  <input type="hidden" name="country_id" value="<?php echo e($country->id); ?>">
 
- <label for="nosaukums">Nosaukums: </label>
+ <label for="nosaukums">  <?php echo e(__('Nosaukums:')); ?> </label>
  <input type="string" name="nosaukums" id="nosaukums">
  <br>
  <br>
- <label for="about">About: </label>
+ <label for="about"> <?php echo e(__('Apraksts:')); ?></label>
  <input type="string" name="about" id="about">
  <br>
  <br>
- <input type="submit" class ="button"value="Add">
+ <input type="submit" class ="button"value="<?php echo e(__('Add')); ?>">
  </form>
 </body>
 </html>

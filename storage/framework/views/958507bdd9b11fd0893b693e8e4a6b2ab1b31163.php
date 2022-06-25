@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <h1 class = "header">Information about countries that have been added </h1>
+    <h1 class = "header"><?php echo e(__('Informācija par pievienotajām valstīm')); ?></h1>
 </head>
 <body>
     <link rel="stylesheet" href="css\cssTT2.css" />
@@ -36,16 +36,16 @@
         </style>
 
  <?php if(count($countries) == 0): ?>
- <p color='red'> There are no records in the database!</p>
+ <p color='red'><?php echo e(__('Datubāzē nav ierakstu!')); ?></p>
  <?php else: ?>
  <table class="center">
     <tr>
-    <td> Country Name </td>
-    <td> Country Code </td>
-    <td> About </td>
-    <td> Show Leagues </td>
-    <?php if(auth()->guard()->check()): ?><td> Delete country </td>
-    <td> Update country </td><?php endif; ?>
+    <td>    <?php echo e(__('Valsts nosaukums')); ?></td>
+    <td>   <?php echo e(__('Valsts kods')); ?> </td>
+    <td>   <?php echo e(__('Apraksts')); ?></td>
+    <td> <?php echo e(__('Parādīt līgas')); ?> </td>
+    <?php if(auth()->guard()->check()): ?><td>  <?php echo e(__('Izdzēst valsti')); ?> </td>
+    <td>  <?php echo e(__('Mainīt informāciju')); ?> </td><?php endif; ?>
 
     </tr>
  <?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -54,27 +54,29 @@
             <td> <?php echo e($country->code); ?> </td>
             <td> <?php echo e($country->about); ?> </td>
             <td>
-                <input type="button" value="show" class="button"
+                <input type="button" value="<?php echo e(__('Show')); ?>" class="button"
 onclick="showLeagues(<?php echo e($country->id); ?>)"> </td>
 
 
 <?php if(auth()->guard()->check()): ?>
-<td> <form method="POST" action="<?php echo e(action([App\Http\Controllers\CountryController::class, 'destroy'], $country->id)); ?>"><?php echo csrf_field(); ?> <?php echo method_field('DELETE'); ?><input type="submit"class="button" value="delete"></form> </td>
+<td> <form method="POST" action="<?php echo e(action([App\Http\Controllers\CountryController::class, 'destroy'], $country->id)); ?>"><?php echo csrf_field(); ?> <?php echo method_field('DELETE'); ?><input type="submit"class="button" value="<?php echo e(__('Delete')); ?>"></form> </td>
     </td>
 
-    <td> <form method="POST" action="<?php echo e(action([App\Http\Controllers\CountryController::class, 'edit'], $country->id)); ?>"><?php echo csrf_field(); ?> <?php echo method_field('GET'); ?><input type="submit"class="button" value="Update"></form> </td>
+    <td> <form method="POST" action="<?php echo e(action([App\Http\Controllers\CountryController::class, 'edit'], $country->id)); ?>"><?php echo csrf_field(); ?> <?php echo method_field('GET'); ?><input type="submit"class="button" value="<?php echo e(__('Update')); ?>"></form> </td>
         </td>
 
         <?php endif; ?>
 
 
 </td>
+
  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
  </table>
+ <a  class="underline text-sm text-gray-600 hover:text-gray-900" href ="/dashboard"><?php echo e(__('Atpakaļ uz sākumu!')); ?> </a>
  <?php endif; ?>
  <?php if(auth()->guard()->check()): ?>
  <td> <form method="POST" action="<?php echo e(action([App\Http\Controllers\CountryController::class, 'create'])); ?>"><?php echo csrf_field(); ?> <?php echo method_field('GET'); ?>
-    <input type="submit"class="button" value="New Country"></form> </td>
+    <input type="submit"class="button" value="<?php echo e(__('New country')); ?>"></form> </td>
     </td><?php endif; ?>
  <script>
  function showLeagues(countryID) {

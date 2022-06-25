@@ -35,16 +35,18 @@
     <?php
     use App\Http\Controllers\TeamController;
     ?>
-    Update information for league <b><?php echo e($teams->nosaukums); ?></b>:
-    With previous information <b><?php echo e($teams->nosaukums); ?></b> , <b><?php echo e($teams->about); ?></b>
+
+        <?php echo e(__('Atjaunosim informāciju par komandu -')); ?> <b><?php echo e($teams->nosaukums); ?></b>:
+        <?php echo e(__('Ar iepriekšējo informāciju -')); ?>  <b><?php echo e($teams->nosaukums); ?></b> , <b><?php echo e($teams->about); ?></b>
     <form method="POST" action="<?php echo e(action([App\Http\Controllers\TeamController::class, 'update'], $teams->id)); ?>" method="post">
     <?php echo csrf_field(); ?>
     <?php echo method_field('GET'); ?>
-     <label for="nosaukums">Updated team nosaukums: </label>
+
+     <label for="nosaukums"><?php echo e(__('Jaunais komandas nosaukums:')); ?></label>
      <input type="text" name="nosaukums" id="nosaukums" value="<?php echo e($teams->nosaukums); ?>">
-     <label for="about">Updated About: </label>
+     <label for="about"><?php echo e(__('Jaunais apraksts:')); ?> </label>
      <input type="text" name="about" id="about" value="<?php echo e($teams->about); ?>">
-     <input type="submit" class="button"value="Update">
+     <input type="submit" class="button"value="<?php echo e(__('Update')); ?>">
     </form>
      <?php if(count($errors) > 0): ?>
      <div>

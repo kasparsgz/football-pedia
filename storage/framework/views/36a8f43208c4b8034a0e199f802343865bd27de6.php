@@ -33,22 +33,23 @@
             border: 3px solid #86af49;}
             .button:hover {background-color: #86af49}
             </style>
-Input the information about the <b>new country:</b>
+
+                <?php echo e(__('Ievadiet informāciju par')); ?> <b> <?php echo e(__('jauno valsti:')); ?></b>
 <form method="POST" action="<?php echo e(action([App\Http\Controllers\CountryController::class, 'store'])); ?>">
 <?php echo csrf_field(); ?>
-<label for="name">Country Name: </label>
+<label for="name"><?php echo e(__('Valsts nosaukums:')); ?> </label>
 <input type="string" name="name" id="name">
 <br>
 <br>
-<label for="code">Country Code: </label>
+<label for="code">    <?php echo e(__('Valsts kods:')); ?> </label>
 <input type="string" name="code" id="code">
 <br>
 <br>
-<label for="about">About: </label>
+<label for="about"> <?php echo e(__('Apraksts:')); ?> </label>
 <input type="text" name="about" id="about">
 <br>
 <br>
-<input type="submit" class="button" value="Add">
+<input type="submit" class="button" value="<?php echo e(__('Add')); ?>">
 
 </form>
 </body>

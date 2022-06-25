@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <h1 class = "header">Information about teams that have been added</h1>
+        <h1 class = "header">{{ __('Informācija par pievienotajām komandām') }}</h1>
     </head>
 <body>
     <style>
@@ -34,31 +34,32 @@
     .button:hover {background-color: #86af49}
 </style>
  @if (count($teams) == 0)
- <p color='red'> There is no team in the database!</p>
+
+ <p color='red'> {{ __('Datubāzē nav ierakstu!') }}</p>
  @else
  <table border="1" class="center">
  <tr>
- <td> Nosaukums </td>
- <td> Team About </td>
- <td> Show Players </td>
+ <td> {{ __('Nosaukums') }} </td>
+ <td> {{ __('Apraksts') }} </td>
+ <td>{{ __('Parādīt spēlētājus') }} </td>
 @auth
-<td> Delete Team</td>
-<td> Update Team</td>
+<td> {{ __('Izdzēst komandu') }}</td>
+<td> {{ __('Atjaunot informāciju') }}</td>
 @endauth
  </tr>
  @foreach ($teams as $team)
  <tr>
  <td> {{ $team->nosaukums }} </td>
  <td> {{ $team->about }} </td>
- <td> <input type="button" value="show"class="button"
+ <td> <input type="button" value="{{ __('Show') }}"class="button"
     onclick="showPlayers({{ $team->id }})"> </td>@auth
  <td><form method="POST"
     action="{{action([App\Http\Controllers\TeamController::class, 'destroy'],
     $team->id) }}">
-     @csrf @method('DELETE')<input type="submit"class="button"value="delete"></form> </td>
+     @csrf @method('DELETE')<input type="submit"class="button"value="{{ __('Delete') }}"></form> </td>
     <td> <form method="POST" action="{{
         action([App\Http\Controllers\TeamController::class, 'edit'], $team->id)
-        }}">@csrf @method('GET')<input type="submit"class="button" value="Update"></form> </td>
+        }}">@csrf @method('GET')<input type="submit"class="button" value="{{ __('Update') }}"></form> </td>
         </td>
  </td>
 @endauth
@@ -77,10 +78,10 @@
  @endforeach
 
  </table>
- <input type="button" value="Back to start"class="button"
+ <input type="button" value="{{ __('Back to start') }}"class="button"
  onclick="Back()">
  @endif @auth
- <p> <input type="button" class="button"value="New Team" onclick="newTeam( {{ $league_id
+ <p> <input type="button" class="button"value="{{ __('New team') }}" onclick="newTeam( {{ $league_id
  }}
  )"> </p> @endauth
 

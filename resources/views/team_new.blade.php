@@ -33,22 +33,23 @@
         .button:hover {background-color: #86af49}
         </style>
 <body>
- We will add a team for <b>{{ $league->nosaukums }}</b>:
+
+    {{ __('Pievienosim jaunu komandu līgā -') }} <b>{{ $league->nosaukums }}</b>:
  <br>
  <br>
  <form method="POST"
 action="{{action([App\Http\Controllers\TeamController::class, 'store']) }}">
  @csrf
  <input type="hidden" name="league_id" value="{{ $league->id }}">
- <label for="nosaukums">Nosaukums: </label>
+ <label for="nosaukums">{{ __('Nosaukums:') }} </label>
  <input type="string" name="nosaukums" id="nosaukums">
  <br>
  <br>
- <label for="about">About: </label>
+ <label for="about">{{ __('Apraksts:') }} </label>
  <input type="string" name="about" id="about">
  <br>
  <br>
- <input type="submit" class = "button"value="Add">
+ <input type="submit" class = "button"value="{{ __('Add') }}">
  </form>
 </body>
 </html>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
     <head>
-        <h1 class = "header">Information about players that have been added</h1>
+        <h1 class = "header"><?php echo e(__('Informācija par pievienotajiem spēlētājiem')); ?> </h1>
     </head>
 <body>
     <style>
@@ -34,18 +35,19 @@
     .button:hover {background-color: #86af49}
 </style>
  <?php if(count($players) == 0): ?>
- <p color='red'> There is player in the database!</p>
+
+ <p color='red'> <?php echo e(__('Datubāzē nav ierakstu!')); ?></p>
  <?php else: ?>
  <table border="1" class="center">
  <tr>
 
- <td> Vārds </td>
- <td> Uzvārds </td>
- <td> Nacionalitāte </td>
- <td> About </td>
+ <td>  <?php echo e(__('Vārds')); ?> </td>
+ <td> <?php echo e(__('Uzvārds')); ?> </td>
+ <td> <?php echo e(__('Nacionalitāte')); ?> </td>
+ <td> <?php echo e(__('Apraksts')); ?> </td>
  <?php if(auth()->guard()->check()): ?>
- <td> Delete Player</td>
- <td> Update Player</td>
+ <td> <?php echo e(__('Izdzēst spēlētāju')); ?></td>
+ <td> <?php echo e(__('Izmainīt informāciju')); ?></td>
  <?php endif; ?>
  </tr>
  <?php $__currentLoopData = $players; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $player): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -59,16 +61,16 @@
     action="<?php echo e(action([App\Http\Controllers\PlayerController::class, 'destroy'],
     $player->id)); ?>">
      <?php echo csrf_field(); ?> <?php echo method_field('DELETE'); ?><input type="submit" class="button"
-    value="delete"></form> </td>
-    <td> <form method="POST" action="<?php echo e(action([App\Http\Controllers\PlayerController::class, 'edit'], $player->id)); ?>"><?php echo csrf_field(); ?> <?php echo method_field('GET'); ?><input type="submit"class="button" value="Update"></form> </td>
+    value="<?php echo e(__('Delete')); ?>"></form> </td>
+    <td> <form method="POST" action="<?php echo e(action([App\Http\Controllers\PlayerController::class, 'edit'], $player->id)); ?>"><?php echo csrf_field(); ?> <?php echo method_field('GET'); ?><input type="submit"class="button" value="<?php echo e(__('Update')); ?>"></form> </td>
         </td>
  </td><?php endif; ?>
  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
  </table>
- <input type="button" value="Back to start"class="button"
+ <input type="button" value="<?php echo e(__('Back to start')); ?>"class="button"
  onclick="Back()">
  <?php endif; ?> <?php if(auth()->guard()->check()): ?>
- <p> <input type="button" class="button"value="New Player" onclick="newPlayer( <?php echo e($team_id); ?>
+ <p> <input type="button" class="button"value="<?php echo e(__('New player')); ?>" onclick="newPlayer( <?php echo e($team_id); ?>
 
  )"> </p> <?php endif; ?>
 

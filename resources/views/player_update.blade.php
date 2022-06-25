@@ -37,21 +37,21 @@
     use App\Http\Controllers\PlayerController;
     @endphp
 
-    Update information for player <b>{{ $players->first_name }}</b> , <b>{{ $players->last_name }}</b>:
+ {{ __('Atjaunosim informāciju par spēlētāju -') }}  <b>{{ $players->first_name }}</b> , <b>{{ $players->last_name }}</b>:
     <br>
-    With previous information <b>{{ $players->country }}</b> , <b>{{ $players->about }}</b>
+    {{ __('Ar iepriekšējo informāciju') }} <b>{{ $players->country }}</b> , <b>{{ $players->about }}</b>
     <form method="POST" action="{{action([App\Http\Controllers\PlayerController::class, 'update'], $players->id) }}" method="post">
     @csrf
     @method('GET')
-     <label for="first_name">Updated vārds: </label>
+     <label for="first_name"> {{ __('Jaunais vārds:') }} </label>
      <input type="text" name="first_name" id="first_name" value='{{ $players->first_name }}'>
-     <label for="last_name">Updated uzvārds: </label>
+     <label for="last_name">{{ __('Jaunais uzvārds:') }} </label>
      <input type="text" name="last_name" id="last_name" value="{{ $players->last_name }}">
-     <label for="country">Updated nacionalitāte: </label>
+     <label for="country">{{ __('Jaunā nacionalitāte:') }} </label>
      <input type="text" name="country" id="country" value="{{ $players->country }}">
-     <label for="about">Updated about: </label>
+     <label for="about">{{ __('Jaunais apraksts:') }} </label>
      <input type="text" name="about" id="about" value="{{ $players->about }}">
-     <input type="submit" class="button"value="Update">
+     <input type="submit" class="button"value="{{ __('Update') }}">
     </form>
      @if (count($errors) > 0)
      <div>

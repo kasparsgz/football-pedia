@@ -33,22 +33,23 @@
         .button:hover {background-color: #86af49}
         </style>
 <body>
- We will add a team for <b><?php echo e($league->nosaukums); ?></b>:
+
+    <?php echo e(__('Pievienosim jaunu komandu līgā -')); ?> <b><?php echo e($league->nosaukums); ?></b>:
  <br>
  <br>
  <form method="POST"
 action="<?php echo e(action([App\Http\Controllers\TeamController::class, 'store'])); ?>">
  <?php echo csrf_field(); ?>
  <input type="hidden" name="league_id" value="<?php echo e($league->id); ?>">
- <label for="nosaukums">Nosaukums: </label>
+ <label for="nosaukums"><?php echo e(__('Nosaukums:')); ?> </label>
  <input type="string" name="nosaukums" id="nosaukums">
  <br>
  <br>
- <label for="about">About: </label>
+ <label for="about"><?php echo e(__('Apraksts:')); ?> </label>
  <input type="string" name="about" id="about">
  <br>
  <br>
- <input type="submit" class = "button"value="Add">
+ <input type="submit" class = "button"value="<?php echo e(__('Add')); ?>">
  </form>
 </body>
 </html>

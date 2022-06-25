@@ -20,10 +20,20 @@ use App\Http\Controllers\PlayerController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+// ADMIN DASHBOARD
+Route::get('/admin_dashboard', function () {
+    return view('admin_dashboard');
+})->middleware(['auth', 'admin'])->name('admin_dashboard');
 
 require __DIR__.'/auth.php';
 
@@ -48,3 +58,5 @@ Route::resource('player', PlayerController::class, ['except' => ['index',
 Route::get('league/country/team/players/{id}/', [PlayerController::class, 'index']);
 Route::get('league/country/team/players/{id}/update', [PlayerController::class, 'update']);
 Route::get('league/country/team/players/{id}/create', [PlayerController::class, 'create']);
+
+//Route::get('lang/{locale}',LanguageController::class);
