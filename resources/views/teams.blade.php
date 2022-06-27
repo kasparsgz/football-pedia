@@ -5,9 +5,12 @@
     </head>
 <body>
     <style>
-        body {
-    background-color:#e3eaa7;
-    }
+         body {
+ background-image: url("https://img.freepik.com/free-vector/soccer-ball-grass-background_1284-8507.jpg?t=st=1656276311~exp=1656276911~hmac=3e07db6860581779cbc0dbdbfdf6f1f5f0da14e9cc61ae8a344eeaf1bb5f5360&w=826") ;
+ background-image: no-repeat ;
+ background-size: auto;
+ background-color: #e3eaa7;
+        }
     .header {
     text-align: center;
 }
@@ -78,14 +81,14 @@
  @endforeach
 
  </table>
- <input type="button" value="{{ __('Back to start') }}"class="button"
- onclick="Back()">
+
  @endif @auth
  <p> <input type="button" class="button"value="{{ __('New team') }}" onclick="newTeam( {{ $league_id
  }}
  )"> </p> @endauth
 
-
+<input type="button" value="{{ __('Back to start') }}"class="button"
+ onclick="Back()">
  <script>
      function showPlayers(teamID) {///te vel jālabo
      window.location.href = "players/" + teamID;
