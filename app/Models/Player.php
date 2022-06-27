@@ -11,7 +11,9 @@ use App\Models\User;
 
 class Player extends Model
 {
+    public $timestamps = false;
     use HasFactory;
+    protected $fillable = ['first_name', 'last_name', 'country', 'about'];
     public function team()
     { // FK relationship
     return $this->belongsTo(Team::class);

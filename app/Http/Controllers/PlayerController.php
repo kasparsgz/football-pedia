@@ -98,7 +98,7 @@ class PlayerController extends Controller
     public function update(Request $request, $id)
     {
         if(!Auth::check()) return "Not allowed! Go home!";
-        $this->authorize("update", Player::class);
+        $this->authorize('update', Player::class);
         $rules = array(
             'first_name' => 'required|min:2|max:191',
             'last_name' => 'required|min:2|max:191',
@@ -107,13 +107,20 @@ class PlayerController extends Controller
             $this->validate($request, $rules);
 
 
-        $player = Team::find($id);
+        $player = Player::find($id);
         $player->first_name=$request->get('first_name');
         $player->last_name=$request->get('last_name');
         $player->country=$request->get('country');
         $player->about=$request->get('about');
         $player->save();
-        return redirect('league/country/team/player/'.$player->team_id);
+        return redirect('league/country/team/players/'.$player->team_id);
+       /*
+        $league = League::find($id);
+        $league->nosaukums=$request->get('nosaukums');
+        $league->about=$request->get('about');
+        $league->save();
+        return redirect('league/country/'.$league->country_id);
+    }*/
     }
 
     /**
