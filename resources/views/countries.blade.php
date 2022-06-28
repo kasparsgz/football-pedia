@@ -4,7 +4,6 @@
     <h1 class = "header">{{ __('Informācija par pievienotajām valstīm') }}</h1>
 </head>
 <body>
-    <link rel="stylesheet" href="css\cssTT2.css" />
     <style>
     body {
  background-image: url("https://img.freepik.com/free-vector/soccer-ball-grass-background_1284-8507.jpg?t=st=1656276311~exp=1656276911~hmac=3e07db6860581779cbc0dbdbfdf6f1f5f0da14e9cc61ae8a344eeaf1bb5f5360&w=826") ;

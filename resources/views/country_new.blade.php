@@ -54,7 +54,15 @@ action([App\Http\Controllers\CountryController::class, 'store']) }}">
 <br>
 <br>
 <input type="submit" class="button" value="{{ __('Add') }}">
-
+@if (count($errors) > 0)
+<div>
+<ul>
+@foreach ($errors->all() as $error)
+<li>{{ $error }}</li>
+@endforeach
+</ul>
+</div>
+@endif
 </form>
 </body>
 </html>

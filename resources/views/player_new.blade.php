@@ -62,5 +62,14 @@ action="{{action([App\Http\Controllers\PlayerController::class, 'store']) }}">
  <br>
  <input type="submit" class ="button" value="{{ __('Add') }}">
  </form>
+ @if (count($errors) > 0)
+ <div>
+ <ul>
+ @foreach ($errors->all() as $error)
+ <li>{{ $error }}</li>
+ @endforeach
+ </ul>
+ </div>
+ @endif
 </body>
 </html>
